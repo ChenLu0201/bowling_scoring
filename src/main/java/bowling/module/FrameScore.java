@@ -1,17 +1,38 @@
-package bowling;
+package bowling.module;
+
+import static bowling.Constants.TEN_PINS;
 
 public class FrameScore {
     private int firstRoll;
     private int secondRoll;
-    private int extraRollOne;
-    private int getExtraRollTwo;
+    private int extraRoll;
+    private boolean finalRoll;
 
     public FrameScore() {
+    }
+
+    public FrameScore(boolean finalRoll) {
+        this.finalRoll = finalRoll;
     }
 
     public FrameScore(int firstRoll, int secondRoll) {
         this.firstRoll = firstRoll;
         this.secondRoll = secondRoll;
+    }
+
+    public FrameScore(int firstRoll, int secondRoll, int extraRoll) {
+        this.firstRoll = firstRoll;
+        this.secondRoll = secondRoll;
+        this.extraRoll = extraRoll;
+    }
+
+    public boolean isInvalidScore() {
+        return firstRoll > TEN_PINS || secondRoll > TEN_PINS || extraRoll > TEN_PINS
+                || (firstRoll + secondRoll > TEN_PINS && !finalRoll);
+    }
+
+    public int basicScore() {
+        return firstRoll + secondRoll;
     }
 
     public int getFirstRoll() {
@@ -30,20 +51,20 @@ public class FrameScore {
         this.secondRoll = secondRoll;
     }
 
-    public int getExtraRollOne() {
-        return extraRollOne;
+    public int getExtraRoll() {
+        return extraRoll;
     }
 
-    public void setExtraRollOne(int extraRollOne) {
-        this.extraRollOne = extraRollOne;
+    public void setExtraRoll(int extraRoll) {
+        this.extraRoll = extraRoll;
     }
 
-    public int getGetExtraRollTwo() {
-        return getExtraRollTwo;
+    public boolean isFinalRoll() {
+        return finalRoll;
     }
 
-    public void setGetExtraRollTwo(int getExtraRollTwo) {
-        this.getExtraRollTwo = getExtraRollTwo;
+    public void setFinalRoll(boolean finalRoll) {
+        this.finalRoll = finalRoll;
     }
 
     @Override
@@ -55,6 +76,7 @@ public class FrameScore {
 
         if (firstRoll != that.firstRoll) return false;
         if (secondRoll != that.secondRoll) return false;
+        if (extraRoll != that.extraRoll) return false;
 
         return true;
     }
