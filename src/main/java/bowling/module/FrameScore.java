@@ -87,4 +87,14 @@ public class FrameScore {
         result = 31 * result + secondRoll;
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "FrameScore{" +
+                "firstRoll=" + firstRoll +
+                ", secondRoll=" + secondRoll +
+                ", extraRoll=" + extraRoll +
+                ", finalRoll=" + finalRoll +
+                '}';
+    }
 }

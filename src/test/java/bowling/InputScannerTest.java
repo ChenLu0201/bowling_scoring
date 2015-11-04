@@ -51,4 +51,20 @@ public class InputScannerTest {
         scanner.scan("1 2 3 4 10 5 6 10");
     }
 
+    @Test
+    public void shouldGetExtraRollForLastFrame() throws Exception {
+        List<FrameScore> scores = scanner.scan("1 2 3 4 10 5 5 10 8 0 10 6 3 10 10 10 8");
+        assertThat(scores.size(), is(10));
+        assertThat(scores.get(0), is(equalTo(new FrameScore(1, 2))));
+        assertThat(scores.get(1), is(equalTo(new FrameScore(3, 4))));
+        assertThat(scores.get(2), is(equalTo(new FrameScore(10, 0))));
+        assertThat(scores.get(3), is(equalTo(new FrameScore(5, 5))));
+        assertThat(scores.get(4), is(equalTo(new FrameScore(10, 0))));
+        assertThat(scores.get(5), is(equalTo(new FrameScore(8, 0))));
+        assertThat(scores.get(6), is(equalTo(new FrameScore(10, 0))));
+        assertThat(scores.get(7), is(equalTo(new FrameScore(6, 3))));
+        assertThat(scores.get(8), is(equalTo(new FrameScore(10, 0))));
+        assertThat(scores.get(9), is(equalTo(new FrameScore(10, 10, 8))));
+        assertThat(scores.get(9).isFinalRoll(), is(true));
+    }
 }
