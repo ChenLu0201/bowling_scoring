@@ -1,5 +1,6 @@
-package bowling;
+package bowling.service;
 
+import bowling.Constants;
 import bowling.Exception.ScoreFormatException;
 import bowling.module.FrameScore;
 
@@ -8,7 +9,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ScoreScanner {
+public class InputScoreScanner {
     public List<FrameScore> scan(String scoreStr) throws ScoreFormatException {
         List<FrameScore> result = new ArrayList<FrameScore>();
         LinkedList<String> scores = new LinkedList<String>(Arrays.asList(scoreStr.split(Constants.SCORE_SPLITTER)));
