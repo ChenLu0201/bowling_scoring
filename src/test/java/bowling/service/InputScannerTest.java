@@ -1,8 +1,7 @@
-package bowling;
+package bowling.service;
 
 import bowling.Exception.ScoreFormatException;
 import bowling.module.FrameScore;
-import bowling.service.InputScoreScanner;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;

@@ -1,5 +1,7 @@
 package bowling.module;
 
+import java.util.List;
+
 import static bowling.Constants.TEN_PINS;
 
 public class FrameScore {
@@ -31,8 +33,16 @@ public class FrameScore {
                 || (firstRoll + secondRoll > TEN_PINS && !finalRoll);
     }
 
+    public boolean isStrike() {
+        return firstRoll == TEN_PINS;
+    }
+
+    public boolean isSpare() {
+        return !isStrike() && basicScore() == TEN_PINS;
+    }
+
     public int basicScore() {
-        return firstRoll + secondRoll;
+        return firstRoll + secondRoll + extraRoll;
     }
 
     public int getFirstRoll() {
@@ -96,5 +106,40 @@ public class FrameScore {
                 ", extraRoll=" + extraRoll +
                 ", finalRoll=" + finalRoll +
                 '}';
+    }
+
+    public int getTotalScore(List<FrameScore> frameScores, int currentIndex) {
+        int result = basicScore();
+        if (frameScores.get(currentIndex).isFinalRoll()) {
+            return result;
+        }
+        currentIndex += 1;
+        FrameScore nextFrameScore = nextFrameScore(frameScores, currentIndex);
+        if (isStrike()) {
+            if (null != nextFrameScore) {
+                result += nextFrameScore.getFirstRoll();
+                if (nextFrameScore.isFinalRoll() || !nextFrameScore.isStrike()) {
+                    result += nextFrameScore.getSecondRoll();
+                } else {
+                    nextFrameScore = nextFrameScore(frameScores, currentIndex + 1);
+                    if (null != nextFrameScore) {
+                        result += nextFrameScore.getFirstRoll();
+                    }
+                }
+            }
+        } else if (isSpare()) {
+            if (null != nextFrameScore) {
+                result += nextFrameScore.getFirstRoll();
+            }
+            ;
+        }
+        return result;
+    }
+
+    private FrameScore nextFrameScore(List<FrameScore> frameScores, int nextIndex) {
+        if (frameScores.size() > nextIndex) {
+            return frameScores.get(nextIndex);
+        }
+        return null;
     }
 }
