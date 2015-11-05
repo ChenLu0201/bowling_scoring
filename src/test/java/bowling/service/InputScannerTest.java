@@ -1,6 +1,6 @@
 package bowling.service;
 
-import bowling.Exception.ScoreFormatException;
+import bowling.exception.ScoreFormatException;
 import bowling.module.FrameScore;
 import org.junit.Rule;
 import org.junit.Test;

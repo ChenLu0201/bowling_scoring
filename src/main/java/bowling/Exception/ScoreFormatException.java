@@ -1,4 +1,4 @@
-package bowling.Exception;
+package bowling.exception;
 
 public class ScoreFormatException extends Exception {
     public ScoreFormatException(String message, Throwable cause) {
