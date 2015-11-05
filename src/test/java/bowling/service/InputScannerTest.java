@@ -65,6 +65,6 @@ public class InputScannerTest {
         assertThat(scores.get(7), is(equalTo(new FrameScore(6, 3))));
         assertThat(scores.get(8), is(equalTo(new FrameScore(10, 0))));
         assertThat(scores.get(9), is(equalTo(new FrameScore(10, 10, 8))));
-        assertThat(scores.get(9).isFinalRoll(), is(true));
+        assertThat(scores.get(9).isFinalFrame(), is(true));
     }
 }

@@ -8,13 +8,13 @@ public class FrameScore {
     private int firstRoll;
     private int secondRoll;
     private int extraRoll;
-    private boolean finalRoll;
+    private boolean finalFrame;
 
     public FrameScore() {
     }
 
-    public FrameScore(boolean finalRoll) {
-        this.finalRoll = finalRoll;
+    public FrameScore(boolean finalFrame) {
+        this.finalFrame = finalFrame;
     }
 
     public FrameScore(int firstRoll, int secondRoll) {
@@ -28,16 +28,16 @@ public class FrameScore {
         this.extraRoll = extraRoll;
     }
 
-    public FrameScore(int firstRoll, int secondRoll, int extraRoll, boolean finalRoll) {
+    public FrameScore(int firstRoll, int secondRoll, int extraRoll, boolean finalFrame) {
         this.firstRoll = firstRoll;
         this.secondRoll = secondRoll;
         this.extraRoll = extraRoll;
-        this.finalRoll = finalRoll;
+        this.finalFrame = finalFrame;
     }
 
     public boolean isInvalidScore() {
         return firstRoll > TEN_PINS || secondRoll > TEN_PINS || extraRoll > TEN_PINS
-                || (firstRoll + secondRoll > TEN_PINS && !finalRoll);
+                || (firstRoll + secondRoll > TEN_PINS && !finalFrame);
     }
 
     public boolean isStrike() {
@@ -76,12 +76,12 @@ public class FrameScore {
         this.extraRoll = extraRoll;
     }
 
-    public boolean isFinalRoll() {
-        return finalRoll;
+    public boolean isFinalFrame() {
+        return finalFrame;
     }
 
-    public void setFinalRoll(boolean finalRoll) {
-        this.finalRoll = finalRoll;
+    public void setFinalFrame(boolean finalFrame) {
+        this.finalFrame = finalFrame;
     }
 
     @Override
@@ -111,35 +111,41 @@ public class FrameScore {
                 "firstRoll=" + firstRoll +
                 ", secondRoll=" + secondRoll +
                 ", extraRoll=" + extraRoll +
-                ", finalRoll=" + finalRoll +
+                ", finalFrame=" + finalFrame +
                 '}';
     }
 
     public int getTotalScore(List<FrameScore> frameScores, int currentIndex) {
         int result = basicScore();
-        if (frameScores.get(currentIndex).isFinalRoll()) {
+        if (isFinalFrame()) {
             return result;
         }
         currentIndex += 1;
         FrameScore nextFrameScore = nextFrameScore(frameScores, currentIndex);
+        result += addBonus(frameScores, currentIndex, nextFrameScore);
+        return result;
+    }
+
+    private int addBonus(List<FrameScore> frameScores, int currentIndex, FrameScore nextFrameScore) {
+        int bonus = 0;
         if (isStrike()) {
             if (null != nextFrameScore) {
-                result += nextFrameScore.getFirstRoll();
-                if (nextFrameScore.isFinalRoll() || !nextFrameScore.isStrike()) {
-                    result += nextFrameScore.getSecondRoll();
+                bonus += nextFrameScore.getFirstRoll();
+                if (nextFrameScore.isFinalFrame() || !nextFrameScore.isStrike()) {
+                    bonus += nextFrameScore.getSecondRoll();
                 } else {
                     nextFrameScore = nextFrameScore(frameScores, currentIndex + 1);
                     if (null != nextFrameScore) {
-                        result += nextFrameScore.getFirstRoll();
+                        bonus += nextFrameScore.getFirstRoll();
                     }
                 }
             }
         } else if (isSpare()) {
             if (null != nextFrameScore) {
-                result += nextFrameScore.getFirstRoll();
+                bonus += nextFrameScore.getFirstRoll();
             }
         }
-        return result;
+        return bonus;
     }
 
     private FrameScore nextFrameScore(List<FrameScore> frameScores, int nextIndex) {

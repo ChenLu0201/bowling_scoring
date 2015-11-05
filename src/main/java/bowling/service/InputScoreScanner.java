@@ -33,7 +33,7 @@ public class InputScoreScanner {
     private FrameScore initFrameScore(List<FrameScore> result, LinkedList<String> scores) throws ScoreFormatException {
         FrameScore score = new FrameScore(result.size() + 1 == Constants.TOTAL_FRAMES);
         score.setFirstRoll(pollInteger(scores));
-        if (score.isFinalRoll()) {
+        if (score.isFinalFrame()) {
             score.setSecondRoll(pollInteger(scores));
             score.setExtraRoll(pollInteger(scores));
 
