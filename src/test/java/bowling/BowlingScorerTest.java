@@ -46,4 +46,9 @@ public class BowlingScorerTest {
     public void shouldGetFullScore() throws Exception {
         assertThat(bowlingScorer.getScore("10 10 10 10 10 10 10 10 10 10 10 10"), is(300));
     }
+
+    @Test
+    public void shouldGetScoreWithMixedBonus() throws Exception {
+        assertThat(bowlingScorer.getScore("10 10 10 10 10 10 4 5 6 4 10 10 6 4"), is(238));
+    }
 }
