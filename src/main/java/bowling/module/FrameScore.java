@@ -28,6 +28,13 @@ public class FrameScore {
         this.extraRoll = extraRoll;
     }
 
+    public FrameScore(int firstRoll, int secondRoll, int extraRoll, boolean finalRoll) {
+        this.firstRoll = firstRoll;
+        this.secondRoll = secondRoll;
+        this.extraRoll = extraRoll;
+        this.finalRoll = finalRoll;
+    }
+
     public boolean isInvalidScore() {
         return firstRoll > TEN_PINS || secondRoll > TEN_PINS || extraRoll > TEN_PINS
                 || (firstRoll + secondRoll > TEN_PINS && !finalRoll);
@@ -131,7 +138,6 @@ public class FrameScore {
             if (null != nextFrameScore) {
                 result += nextFrameScore.getFirstRoll();
             }
-            ;
         }
         return result;
     }
