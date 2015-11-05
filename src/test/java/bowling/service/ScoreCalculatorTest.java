@@ -9,13 +9,13 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ScoreCaculatorTest {
+public class ScoreCalculatorTest {
     @Test
     public void shouldGetScoreWithNoBonus() throws Exception {
         List<FrameScore> frameScores = new ArrayList<FrameScore>();
         frameScores.add(new FrameScore(1, 2));
         frameScores.add(new FrameScore(3, 4));
-        assertThat(new ScoreCaculator(frameScores).getTotalScore(), is(10));
+        assertThat(new ScoreCalculator(frameScores).getTotalScore(), is(10));
     }
 
     @Test
@@ -23,7 +23,7 @@ public class ScoreCaculatorTest {
         List<FrameScore> frameScores = new ArrayList<FrameScore>();
         frameScores.add(new FrameScore(9, 1));
         frameScores.add(new FrameScore(9, 1));
-        assertThat(new ScoreCaculator(frameScores).getTotalScore(), is(29));
+        assertThat(new ScoreCalculator(frameScores).getTotalScore(), is(29));
     }
 
     @Test
@@ -33,7 +33,7 @@ public class ScoreCaculatorTest {
         frameScores.add(new FrameScore(1, 1));
         frameScores.add(new FrameScore(10, 0));
         frameScores.add(new FrameScore(1, 1));
-        assertThat(new ScoreCaculator(frameScores).getTotalScore(), is(18));
+        assertThat(new ScoreCalculator(frameScores).getTotalScore(), is(18));
     }
 
     @Test
@@ -49,6 +49,6 @@ public class ScoreCaculatorTest {
         frameScores.add(new FrameScore(10, 0));
         frameScores.add(new FrameScore(10, 0));
         frameScores.add(new FrameScore(10, 10, 10, true));
-        assertThat(new ScoreCaculator(frameScores).getTotalScore(), is(300));
+        assertThat(new ScoreCalculator(frameScores).getTotalScore(), is(300));
     }
 }

@@ -4,13 +4,13 @@ import bowling.module.FrameScore;
 
 import java.util.List;
 
-public class ScoreCaculator {
+public class ScoreCalculator {
 
     private List<FrameScore> frameScores;
 
     private int totalScore = 0;
 
-    public ScoreCaculator(List<FrameScore> frameScores) {
+    public ScoreCalculator(List<FrameScore> frameScores) {
         this.frameScores = frameScores;
     }
 

@@ -43,10 +43,14 @@ public class InputScoreScanner {
             }
 
         }
+        validateFrameScore(score);
+        return score;
+    }
+
+    private void validateFrameScore(FrameScore score) throws ScoreFormatException {
         if (score.isInvalidScore()) {
             throw new ScoreFormatException("The score exceeds 10 in one frame, first roll is " + score.getFirstRoll() + ", second roll is " + score.getSecondRoll(), null);
         }
-        return score;
     }
 
     private Integer pollInteger(LinkedList<String> scores) {
